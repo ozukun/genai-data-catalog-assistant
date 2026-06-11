@@ -1,0 +1,522 @@
+[
+  {
+    "mapping_id": 1,
+    "source_entity_type": "kpi",
+    "source_entity_name": "gross_margin",
+    "relationship": "belongs_to_business_area",
+    "target_entity_type": "business_area",
+    "target_entity_name": "commercial",
+    "description": "gross_margin belongs to the commercial business area."
+  },
+  {
+    "mapping_id": 2,
+    "source_entity_type": "kpi",
+    "source_entity_name": "average_sales_margin_per_month",
+    "relationship": "belongs_to_business_area",
+    "target_entity_type": "business_area",
+    "target_entity_name": "commercial",
+    "description": "average_sales_margin_per_month belongs to the commercial business area."
+  },
+  {
+    "mapping_id": 3,
+    "source_entity_type": "kpi",
+    "source_entity_name": "average_purchase_margin_per_month",
+    "relationship": "belongs_to_business_area",
+    "target_entity_type": "business_area",
+    "target_entity_name": "procurement",
+    "description": "average_purchase_margin_per_month belongs to the procurement business area."
+  },
+  {
+    "mapping_id": 4,
+    "source_entity_type": "kpi",
+    "source_entity_name": "total_sales_amount",
+    "relationship": "belongs_to_business_area",
+    "target_entity_type": "business_area",
+    "target_entity_name": "commercial",
+    "description": "total_sales_amount belongs to the commercial business area."
+  },
+  {
+    "mapping_id": 5,
+    "source_entity_type": "kpi",
+    "source_entity_name": "purchase_cost_total",
+    "relationship": "belongs_to_business_area",
+    "target_entity_type": "business_area",
+    "target_entity_name": "procurement",
+    "description": "purchase_cost_total belongs to the procurement business area."
+  },
+
+  {
+    "mapping_id": 6,
+    "source_entity_type": "table",
+    "source_entity_name": "Fact_Sales",
+    "relationship": "belongs_to_business_area",
+    "target_entity_type": "business_area",
+    "target_entity_name": "commercial",
+    "description": "Fact_Sales belongs to the commercial business area."
+  },
+  {
+    "mapping_id": 7,
+    "source_entity_type": "table",
+    "source_entity_name": "Fact_Purchase",
+    "relationship": "belongs_to_business_area",
+    "target_entity_type": "business_area",
+    "target_entity_name": "procurement",
+    "description": "Fact_Purchase belongs to the procurement business area."
+  },
+
+  {
+    "mapping_id": 8,
+    "source_entity_type": "department",
+    "source_entity_name": "Sales",
+    "relationship": "belongs_to_business_area",
+    "target_entity_type": "business_area",
+    "target_entity_name": "commercial",
+    "description": "Sales department belongs to the commercial business area."
+  },
+  {
+    "mapping_id": 9,
+    "source_entity_type": "department",
+    "source_entity_name": "Purchasing",
+    "relationship": "belongs_to_business_area",
+    "target_entity_type": "business_area",
+    "target_entity_name": "procurement",
+    "description": "Purchasing department belongs to the procurement business area."
+  },
+  {
+    "mapping_id": 10,
+    "source_entity_type": "department",
+    "source_entity_name": "Finance",
+    "relationship": "belongs_to_business_area",
+    "target_entity_type": "business_area",
+    "target_entity_name": "commercial",
+    "description": "Finance department is related to the commercial business area."
+  },
+  {
+    "mapping_id": 11,
+    "source_entity_type": "department",
+    "source_entity_name": "Finance",
+    "relationship": "belongs_to_business_area",
+    "target_entity_type": "business_area",
+    "target_entity_name": "procurement",
+    "description": "Finance department is related to the procurement business area."
+  },
+
+  {
+    "mapping_id": 12,
+    "source_entity_type": "kpi",
+    "source_entity_name": "gross_margin",
+    "relationship": "sourced_from",
+    "target_entity_type": "table",
+    "target_entity_name": "Fact_Sales",
+    "description": "gross_margin is sourced from Fact_Sales."
+  },
+  {
+    "mapping_id": 13,
+    "source_entity_type": "kpi",
+    "source_entity_name": "average_sales_margin_per_month",
+    "relationship": "sourced_from",
+    "target_entity_type": "table",
+    "target_entity_name": "Fact_Sales",
+    "description": "average_sales_margin_per_month is sourced from Fact_Sales."
+  },
+  {
+    "mapping_id": 14,
+    "source_entity_type": "kpi",
+    "source_entity_name": "average_purchase_margin_per_month",
+    "relationship": "sourced_from",
+    "target_entity_type": "table",
+    "target_entity_name": "Fact_Purchase",
+    "description": "average_purchase_margin_per_month is sourced from Fact_Purchase."
+  },
+  {
+    "mapping_id": 15,
+    "source_entity_type": "kpi",
+    "source_entity_name": "total_sales_amount",
+    "relationship": "sourced_from",
+    "target_entity_type": "table",
+    "target_entity_name": "Fact_Sales",
+    "description": "total_sales_amount is sourced from Fact_Sales."
+  },
+  {
+    "mapping_id": 16,
+    "source_entity_type": "kpi",
+    "source_entity_name": "purchase_cost_total",
+    "relationship": "sourced_from",
+    "target_entity_type": "table",
+    "target_entity_name": "Fact_Purchase",
+    "description": "purchase_cost_total is sourced from Fact_Purchase."
+  },
+
+  {
+    "mapping_id": 17,
+    "source_entity_type": "table",
+    "source_entity_name": "Fact_Sales",
+    "relationship": "has_column",
+    "target_entity_type": "column",
+    "target_entity_name": "fact_sales.revenue",
+    "description": "Fact_Sales has column revenue."
+  },
+  {
+    "mapping_id": 18,
+    "source_entity_type": "table",
+    "source_entity_name": "Fact_Sales",
+    "relationship": "has_column",
+    "target_entity_type": "column",
+    "target_entity_name": "fact_sales.cost",
+    "description": "Fact_Sales has column cost."
+  },
+  {
+    "mapping_id": 19,
+    "source_entity_type": "table",
+    "source_entity_name": "Fact_Sales",
+    "relationship": "has_column",
+    "target_entity_type": "column",
+    "target_entity_name": "fact_sales.margin",
+    "description": "Fact_Sales has column margin."
+  },
+  {
+    "mapping_id": 20,
+    "source_entity_type": "table",
+    "source_entity_name": "Fact_Sales",
+    "relationship": "has_column",
+    "target_entity_type": "column",
+    "target_entity_name": "fact_sales.month",
+    "description": "Fact_Sales has column month."
+  },
+  {
+    "mapping_id": 21,
+    "source_entity_type": "table",
+    "source_entity_name": "Fact_Sales",
+    "relationship": "has_column",
+    "target_entity_type": "column",
+    "target_entity_name": "fact_sales.sales_amount",
+    "description": "Fact_Sales has column sales_amount."
+  },
+  {
+    "mapping_id": 22,
+    "source_entity_type": "table",
+    "source_entity_name": "Fact_Purchase",
+    "relationship": "has_column",
+    "target_entity_type": "column",
+    "target_entity_name": "fact_purchase.margin",
+    "description": "Fact_Purchase has column margin."
+  },
+  {
+    "mapping_id": 23,
+    "source_entity_type": "table",
+    "source_entity_name": "Fact_Purchase",
+    "relationship": "has_column",
+    "target_entity_type": "column",
+    "target_entity_name": "fact_purchase.month",
+    "description": "Fact_Purchase has column month."
+  },
+  {
+    "mapping_id": 24,
+    "source_entity_type": "table",
+    "source_entity_name": "Fact_Purchase",
+    "relationship": "has_column",
+    "target_entity_type": "column",
+    "target_entity_name": "fact_purchase.purchase_cost",
+    "description": "Fact_Purchase has column purchase_cost."
+  },
+
+  {
+    "mapping_id": 25,
+    "source_entity_type": "kpi",
+    "source_entity_name": "gross_margin",
+    "relationship": "calculated_from_column",
+    "target_entity_type": "column",
+    "target_entity_name": "fact_sales.revenue",
+    "description": "gross_margin is calculated from Fact_Sales.revenue."
+  },
+  {
+    "mapping_id": 26,
+    "source_entity_type": "kpi",
+    "source_entity_name": "gross_margin",
+    "relationship": "calculated_from_column",
+    "target_entity_type": "column",
+    "target_entity_name": "fact_sales.cost",
+    "description": "gross_margin is calculated from Fact_Sales.cost."
+  },
+  {
+    "mapping_id": 27,
+    "source_entity_type": "kpi",
+    "source_entity_name": "average_sales_margin_per_month",
+    "relationship": "calculated_from_column",
+    "target_entity_type": "column",
+    "target_entity_name": "fact_sales.margin",
+    "description": "average_sales_margin_per_month is calculated from Fact_Sales.margin."
+  },
+  {
+    "mapping_id": 28,
+    "source_entity_type": "kpi",
+    "source_entity_name": "average_sales_margin_per_month",
+    "relationship": "calculated_from_column",
+    "target_entity_type": "column",
+    "target_entity_name": "fact_sales.month",
+    "description": "average_sales_margin_per_month is grouped or calculated using Fact_Sales.month."
+  },
+  {
+    "mapping_id": 29,
+    "source_entity_type": "kpi",
+    "source_entity_name": "average_purchase_margin_per_month",
+    "relationship": "calculated_from_column",
+    "target_entity_type": "column",
+    "target_entity_name": "fact_purchase.margin",
+    "description": "average_purchase_margin_per_month is calculated from Fact_Purchase.margin."
+  },
+  {
+    "mapping_id": 30,
+    "source_entity_type": "kpi",
+    "source_entity_name": "average_purchase_margin_per_month",
+    "relationship": "calculated_from_column",
+    "target_entity_type": "column",
+    "target_entity_name": "fact_purchase.month",
+    "description": "average_purchase_margin_per_month is grouped or calculated using Fact_Purchase.month."
+  },
+  {
+    "mapping_id": 31,
+    "source_entity_type": "kpi",
+    "source_entity_name": "total_sales_amount",
+    "relationship": "calculated_from_column",
+    "target_entity_type": "column",
+    "target_entity_name": "fact_sales.sales_amount",
+    "description": "total_sales_amount is calculated from Fact_Sales.sales_amount."
+  },
+  {
+    "mapping_id": 32,
+    "source_entity_type": "kpi",
+    "source_entity_name": "purchase_cost_total",
+    "relationship": "calculated_from_column",
+    "target_entity_type": "column",
+    "target_entity_name": "fact_purchase.purchase_cost",
+    "description": "purchase_cost_total is calculated from Fact_Purchase.purchase_cost."
+  },
+
+  {
+    "mapping_id": 33,
+    "source_entity_type": "kpi",
+    "source_entity_name": "gross_margin",
+    "relationship": "mapped_to_department",
+    "target_entity_type": "department",
+    "target_entity_name": "Sales",
+    "description": "gross_margin is mapped to Sales department."
+  },
+  {
+    "mapping_id": 34,
+    "source_entity_type": "kpi",
+    "source_entity_name": "gross_margin",
+    "relationship": "mapped_to_department",
+    "target_entity_type": "department",
+    "target_entity_name": "Finance",
+    "description": "gross_margin is mapped to Finance department."
+  },
+  {
+    "mapping_id": 35,
+    "source_entity_type": "kpi",
+    "source_entity_name": "average_sales_margin_per_month",
+    "relationship": "mapped_to_department",
+    "target_entity_type": "department",
+    "target_entity_name": "Sales",
+    "description": "average_sales_margin_per_month is mapped to Sales department."
+  },
+  {
+    "mapping_id": 36,
+    "source_entity_type": "kpi",
+    "source_entity_name": "average_sales_margin_per_month",
+    "relationship": "mapped_to_department",
+    "target_entity_type": "department",
+    "target_entity_name": "Finance",
+    "description": "average_sales_margin_per_month is mapped to Finance department."
+  },
+  {
+    "mapping_id": 37,
+    "source_entity_type": "kpi",
+    "source_entity_name": "average_purchase_margin_per_month",
+    "relationship": "mapped_to_department",
+    "target_entity_type": "department",
+    "target_entity_name": "Purchasing",
+    "description": "average_purchase_margin_per_month is mapped to Purchasing department."
+  },
+  {
+    "mapping_id": 38,
+    "source_entity_type": "kpi",
+    "source_entity_name": "average_purchase_margin_per_month",
+    "relationship": "mapped_to_department",
+    "target_entity_type": "department",
+    "target_entity_name": "Finance",
+    "description": "average_purchase_margin_per_month is mapped to Finance department."
+  },
+  {
+    "mapping_id": 39,
+    "source_entity_type": "kpi",
+    "source_entity_name": "total_sales_amount",
+    "relationship": "mapped_to_department",
+    "target_entity_type": "department",
+    "target_entity_name": "Sales",
+    "description": "total_sales_amount is mapped to Sales department."
+  },
+  {
+    "mapping_id": 40,
+    "source_entity_type": "kpi",
+    "source_entity_name": "total_sales_amount",
+    "relationship": "mapped_to_department",
+    "target_entity_type": "department",
+    "target_entity_name": "Finance",
+    "description": "total_sales_amount is mapped to Finance department."
+  },
+  {
+    "mapping_id": 41,
+    "source_entity_type": "kpi",
+    "source_entity_name": "purchase_cost_total",
+    "relationship": "mapped_to_department",
+    "target_entity_type": "department",
+    "target_entity_name": "Purchasing",
+    "description": "purchase_cost_total is mapped to Purchasing department."
+  },
+  {
+    "mapping_id": 42,
+    "source_entity_type": "kpi",
+    "source_entity_name": "purchase_cost_total",
+    "relationship": "mapped_to_department",
+    "target_entity_type": "department",
+    "target_entity_name": "Finance",
+    "description": "purchase_cost_total is mapped to Finance department."
+  },
+
+  {
+    "mapping_id": 43,
+    "source_entity_type": "business_term",
+    "source_entity_name": "margin",
+    "relationship": "refers_to",
+    "target_entity_type": "kpi",
+    "target_entity_name": "gross_margin",
+    "description": "The business term margin refers to gross_margin."
+  },
+  {
+    "mapping_id": 44,
+    "source_entity_type": "business_term",
+    "source_entity_name": "gross margin",
+    "relationship": "refers_to",
+    "target_entity_type": "kpi",
+    "target_entity_name": "gross_margin",
+    "description": "The business term gross margin refers to gross_margin."
+  },
+  {
+    "mapping_id": 45,
+    "source_entity_type": "business_term",
+    "source_entity_name": "profitability",
+    "relationship": "refers_to",
+    "target_entity_type": "kpi",
+    "target_entity_name": "gross_margin",
+    "description": "The business term profitability refers to gross_margin."
+  },
+  {
+    "mapping_id": 46,
+    "source_entity_type": "business_term",
+    "source_entity_name": "margin",
+    "relationship": "refers_to",
+    "target_entity_type": "kpi",
+    "target_entity_name": "average_sales_margin_per_month",
+    "description": "The business term margin refers to average_sales_margin_per_month."
+  },
+  {
+    "mapping_id": 47,
+    "source_entity_type": "business_term",
+    "source_entity_name": "average margin",
+    "relationship": "refers_to",
+    "target_entity_type": "kpi",
+    "target_entity_name": "average_sales_margin_per_month",
+    "description": "The business term average margin refers to average_sales_margin_per_month."
+  },
+  {
+    "mapping_id": 48,
+    "source_entity_type": "business_term",
+    "source_entity_name": "sales margin",
+    "relationship": "refers_to",
+    "target_entity_type": "kpi",
+    "target_entity_name": "average_sales_margin_per_month",
+    "description": "The business term sales margin refers to average_sales_margin_per_month."
+  },
+  {
+    "mapping_id": 49,
+    "source_entity_type": "business_term",
+    "source_entity_name": "margin",
+    "relationship": "refers_to",
+    "target_entity_type": "kpi",
+    "target_entity_name": "average_purchase_margin_per_month",
+    "description": "The business term margin refers to average_purchase_margin_per_month."
+  },
+  {
+    "mapping_id": 50,
+    "source_entity_type": "business_term",
+    "source_entity_name": "average margin",
+    "relationship": "refers_to",
+    "target_entity_type": "kpi",
+    "target_entity_name": "average_purchase_margin_per_month",
+    "description": "The business term average margin refers to average_purchase_margin_per_month."
+  },
+  {
+    "mapping_id": 51,
+    "source_entity_type": "business_term",
+    "source_entity_name": "purchase margin",
+    "relationship": "refers_to",
+    "target_entity_type": "kpi",
+    "target_entity_name": "average_purchase_margin_per_month",
+    "description": "The business term purchase margin refers to average_purchase_margin_per_month."
+  },
+  {
+    "mapping_id": 52,
+    "source_entity_type": "business_term",
+    "source_entity_name": "sales",
+    "relationship": "refers_to",
+    "target_entity_type": "kpi",
+    "target_entity_name": "total_sales_amount",
+    "description": "The business term sales refers to total_sales_amount."
+  },
+  {
+    "mapping_id": 53,
+    "source_entity_type": "business_term",
+    "source_entity_name": "revenue",
+    "relationship": "refers_to",
+    "target_entity_type": "kpi",
+    "target_entity_name": "total_sales_amount",
+    "description": "The business term revenue refers to total_sales_amount."
+  },
+  {
+    "mapping_id": 54,
+    "source_entity_type": "business_term",
+    "source_entity_name": "turnover",
+    "relationship": "refers_to",
+    "target_entity_type": "kpi",
+    "target_entity_name": "total_sales_amount",
+    "description": "The business term turnover refers to total_sales_amount."
+  },
+  {
+    "mapping_id": 55,
+    "source_entity_type": "business_term",
+    "source_entity_name": "purchase cost",
+    "relationship": "refers_to",
+    "target_entity_type": "kpi",
+    "target_entity_name": "purchase_cost_total",
+    "description": "The business term purchase cost refers to purchase_cost_total."
+  },
+  {
+    "mapping_id": 56,
+    "source_entity_type": "business_term",
+    "source_entity_name": "buying cost",
+    "relationship": "refers_to",
+    "target_entity_type": "kpi",
+    "target_entity_name": "purchase_cost_total",
+    "description": "The business term buying cost refers to purchase_cost_total."
+  },
+  {
+    "mapping_id": 57,
+    "source_entity_type": "business_term",
+    "source_entity_name": "procurement cost",
+    "relationship": "refers_to",
+    "target_entity_type": "kpi",
+    "target_entity_name": "purchase_cost_total",
+    "description": "The business term procurement cost refers to purchase_cost_total."
+  }
+]

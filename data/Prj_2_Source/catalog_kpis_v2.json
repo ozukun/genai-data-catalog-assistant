@@ -1,0 +1,198 @@
+[
+  {
+    "kpi_id": "gross_margin",
+    "entity_key": "kpi:gross_margin",
+    "kpi_name": "gross_margin",
+    "display_name": "Gross Margin",
+    "description": "Revenue minus cost of goods sold.",
+    "formula": {
+      "description": "Revenue minus cost.",
+      "expression": "revenue - cost"
+    },
+    "primary_business_area_id": "commercial",
+    "business_area_ids": [
+      "commercial"
+    ],
+    "source_tables": [
+      "Fact_Sales"
+    ],
+    "source_columns": [
+      "revenue",
+      "cost"
+    ],
+    "source_table_columns": [
+      {
+        "table_name": "Fact_Sales",
+        "columns": [
+          "revenue",
+          "cost"
+        ]
+      }
+    ],
+    "business_terms": [
+      "margin",
+      "gross margin",
+      "profitability"
+    ],
+    "departments": [
+      "Sales",
+      "Finance"
+    ]
+  },
+  {
+    "kpi_id": "average_sales_margin_per_month",
+    "entity_key": "kpi:average_sales_margin_per_month",
+    "kpi_name": "average_sales_margin_per_month",
+    "display_name": "Average Sales Margin per Month",
+    "description": "Average sales margin calculated per month.",
+    "formula": {
+      "description": "Average margin grouped by month for sales data.",
+      "expression": "AVG(margin) GROUP BY month"
+    },
+    "primary_business_area_id": "commercial",
+    "business_area_ids": [
+      "commercial"
+    ],
+    "source_tables": [
+      "Fact_Sales"
+    ],
+    "source_columns": [
+      "margin",
+      "month"
+    ],
+    "source_table_columns": [
+      {
+        "table_name": "Fact_Sales",
+        "columns": [
+          "margin",
+          "month"
+        ]
+      }
+    ],
+    "business_terms": [
+      "margin",
+      "average margin",
+      "sales margin"
+    ],
+    "departments": [
+      "Sales",
+      "Finance"
+    ]
+  },
+  {
+    "kpi_id": "average_purchase_margin_per_month",
+    "entity_key": "kpi:average_purchase_margin_per_month",
+    "kpi_name": "average_purchase_margin_per_month",
+    "display_name": "Average Purchase Margin per Month",
+    "description": "Average purchase margin calculated per month.",
+    "formula": {
+      "description": "Average margin grouped by month for purchase data.",
+      "expression": "AVG(margin) GROUP BY month"
+    },
+    "primary_business_area_id": "procurement",
+    "business_area_ids": [
+      "procurement"
+    ],
+    "source_tables": [
+      "Fact_Purchase"
+    ],
+    "source_columns": [
+      "margin",
+      "month"
+    ],
+    "source_table_columns": [
+      {
+        "table_name": "Fact_Purchase",
+        "columns": [
+          "margin",
+          "month"
+        ]
+      }
+    ],
+    "business_terms": [
+      "margin",
+      "average margin",
+      "purchase margin"
+    ],
+    "departments": [
+      "Purchasing",
+      "Finance"
+    ]
+  },
+  {
+    "kpi_id": "total_sales_amount",
+    "entity_key": "kpi:total_sales_amount",
+    "kpi_name": "total_sales_amount",
+    "display_name": "Total Sales Amount",
+    "description": "Total sales revenue amount.",
+    "formula": {
+      "description": "Sum of sales amount.",
+      "expression": "SUM(sales_amount)"
+    },
+    "primary_business_area_id": "commercial",
+    "business_area_ids": [
+      "commercial"
+    ],
+    "source_tables": [
+      "Fact_Sales"
+    ],
+    "source_columns": [
+      "sales_amount"
+    ],
+    "source_table_columns": [
+      {
+        "table_name": "Fact_Sales",
+        "columns": [
+          "sales_amount"
+        ]
+      }
+    ],
+    "business_terms": [
+      "sales",
+      "revenue",
+      "turnover"
+    ],
+    "departments": [
+      "Sales",
+      "Finance"
+    ]
+  },
+  {
+    "kpi_id": "purchase_cost_total",
+    "entity_key": "kpi:purchase_cost_total",
+    "kpi_name": "purchase_cost_total",
+    "display_name": "Purchase Cost Total",
+    "description": "Total purchase cost amount.",
+    "formula": {
+      "description": "Sum of purchase cost.",
+      "expression": "SUM(purchase_cost)"
+    },
+    "primary_business_area_id": "procurement",
+    "business_area_ids": [
+      "procurement"
+    ],
+    "source_tables": [
+      "Fact_Purchase"
+    ],
+    "source_columns": [
+      "purchase_cost"
+    ],
+    "source_table_columns": [
+      {
+        "table_name": "Fact_Purchase",
+        "columns": [
+          "purchase_cost"
+        ]
+      }
+    ],
+    "business_terms": [
+      "purchase cost",
+      "buying cost",
+      "procurement cost"
+    ],
+    "departments": [
+      "Purchasing",
+      "Finance"
+    ]
+  }
+]

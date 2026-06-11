@@ -1,0 +1,105 @@
+[
+  {
+    "department_id": "sales",
+    "department_name": "Sales",
+    "primary_business_area_id": "commercial",
+    "business_area_ids": [
+      "commercial"
+    ],
+    "related_kpis": [
+      "gross_margin",
+      "average_sales_margin_per_month",
+      "total_sales_amount"
+    ],
+    "related_tables": [
+      "Fact_Sales"
+    ],
+    "business_terms": [
+      "margin",
+      "gross margin",
+      "profitability",
+      "average margin",
+      "sales margin",
+      "sales",
+      "revenue",
+      "turnover"
+    ],
+    "source_columns": [
+      "revenue",
+      "cost",
+      "margin",
+      "month",
+      "sales_amount"
+    ]
+  },
+  {
+    "department_id": "finance",
+    "department_name": "Finance",
+    "primary_business_area_id": null,
+    "business_area_ids": [
+      "commercial",
+      "procurement"
+    ],
+    "related_kpis": [
+      "gross_margin",
+      "average_sales_margin_per_month",
+      "average_purchase_margin_per_month",
+      "total_sales_amount",
+      "purchase_cost_total"
+    ],
+    "related_tables": [
+      "Fact_Sales",
+      "Fact_Purchase"
+    ],
+    "business_terms": [
+      "margin",
+      "gross margin",
+      "profitability",
+      "average margin",
+      "sales margin",
+      "purchase margin",
+      "sales",
+      "revenue",
+      "turnover",
+      "purchase cost",
+      "buying cost",
+      "procurement cost"
+    ],
+    "source_columns": [
+      "revenue",
+      "cost",
+      "margin",
+      "month",
+      "sales_amount",
+      "purchase_cost"
+    ]
+  },
+  {
+    "department_id": "purchasing",
+    "department_name": "Purchasing",
+    "primary_business_area_id": "procurement",
+    "business_area_ids": [
+      "procurement"
+    ],
+    "related_kpis": [
+      "average_purchase_margin_per_month",
+      "purchase_cost_total"
+    ],
+    "related_tables": [
+      "Fact_Purchase"
+    ],
+    "business_terms": [
+      "margin",
+      "average margin",
+      "purchase margin",
+      "purchase cost",
+      "buying cost",
+      "procurement cost"
+    ],
+    "source_columns": [
+      "margin",
+      "month",
+      "purchase_cost"
+    ]
+  }
+]

@@ -1,0 +1,53 @@
+[
+  {
+    "table_id": "fact_sales",
+    "table_name": "Fact_Sales",
+    "primary_business_area_id": "commercial",
+    "business_area_ids": [
+      "commercial"
+    ],
+    "related_kpis": [
+      "gross_margin",
+      "average_sales_margin_per_month",
+      "total_sales_amount"
+    ],
+    "business_terms": [
+      "margin",
+      "gross margin",
+      "profitability",
+      "average margin",
+      "sales margin",
+      "sales",
+      "revenue",
+      "turnover"
+    ],
+    "departments": [
+      "Sales",
+      "Finance"
+    ]
+  },
+  {
+    "table_id": "fact_purchase",
+    "table_name": "Fact_Purchase",
+    "primary_business_area_id": "procurement",
+    "business_area_ids": [
+      "procurement"
+    ],
+    "related_kpis": [
+      "average_purchase_margin_per_month",
+      "purchase_cost_total"
+    ],
+    "business_terms": [
+      "margin",
+      "average margin",
+      "purchase margin",
+      "purchase cost",
+      "buying cost",
+      "procurement cost"
+    ],
+    "departments": [
+      "Purchasing",
+      "Finance"
+    ]
+  }
+]

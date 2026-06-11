@@ -1,0 +1,32 @@
+[
+  {
+    "intent_id": 1,
+    "intent_name": "find_related_departments",
+    "intent_description": "Find departments related to a business term, KPI, table, column, or other catalog entity.",
+    "question_type": "structured"
+  },
+  {
+    "intent_id": 2,
+    "intent_name": "find_source_tables",
+    "intent_description": "Find source tables used by a KPI, metric, report, or catalog entity.",
+    "question_type": "structured"
+  },
+  {
+    "intent_id": 3,
+    "intent_name": "find_source_columns",
+    "intent_description": "Find source columns used to calculate or define a KPI, metric, or catalog entity.",
+    "question_type": "structured"
+  },
+  {
+    "intent_id": 10,
+    "intent_name": "explain_business_context",
+    "intent_description": "Explain a business term, KPI, metric, department, table, or column in a broader business context.",
+    "question_type": "semantic"
+  },
+  {
+    "intent_id": 99,
+    "intent_name": "unknown",
+    "intent_description": "Used when the user intent cannot be confidently classified.",
+    "question_type": "semantic"
+  }
+]

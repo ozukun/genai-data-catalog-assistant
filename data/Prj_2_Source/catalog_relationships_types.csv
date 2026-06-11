@@ -1,0 +1,10 @@
+relationship_id,relationship,description
+1,refers_to,Maps a business term or synonym to an official catalog entity
+2,sourced_from,Shows that a KPI or metric is sourced from a table
+3,calculated_from_column,Shows that a KPI is calculated from a column
+4,mapped_to_department,Maps an entity to an official department
+5,used_in_report,Shows that an entity is used in a report
+6,shown_on_dashboard,Shows that an entity is shown on a dashboard
+7,owned_by,Shows the official owner of an entity
+8,belongs_to_business_area,Shows the business area of an entity
+9,has_column,Shows that a table contains a column

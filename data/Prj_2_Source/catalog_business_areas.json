@@ -1,0 +1,86 @@
+[
+  {
+    "business_area_id": "commercial",
+    "business_area_name": "Commercial",
+    "description": "Business area covering sales, revenue, turnover, commercial margin, and sales performance context.",
+    "related_departments": [
+      "Sales",
+      "Finance"
+    ],
+    "related_kpis": [
+      "gross_margin",
+      "average_sales_margin_per_month",
+      "total_sales_amount"
+    ],
+    "related_tables": [
+      "Fact_Sales"
+    ],
+    "business_terms": [
+      "margin",
+      "gross margin",
+      "profitability",
+      "average margin",
+      "sales margin",
+      "sales",
+      "revenue",
+      "turnover"
+    ]
+  },
+  {
+    "business_area_id": "procurement",
+    "business_area_name": "Procurement",
+    "description": "Business area covering purchase margin, purchase cost, buying cost, procurement cost, and purchasing performance context.",
+    "related_departments": [
+      "Purchasing",
+      "Finance"
+    ],
+    "related_kpis": [
+      "average_purchase_margin_per_month",
+      "purchase_cost_total"
+    ],
+    "related_tables": [
+      "Fact_Purchase"
+    ],
+    "business_terms": [
+      "margin",
+      "average margin",
+      "purchase margin",
+      "purchase cost",
+      "buying cost",
+      "procurement cost"
+    ]
+  },
+  {
+    "business_area_id": "finance",
+    "business_area_name": "Finance",
+    "description": "Business area covering financial analysis, margin monitoring, revenue analysis, cost analysis, and cross-functional profitability context.",
+    "related_departments": [
+      "Finance"
+    ],
+    "related_kpis": [
+      "gross_margin",
+      "average_sales_margin_per_month",
+      "average_purchase_margin_per_month",
+      "total_sales_amount",
+      "purchase_cost_total"
+    ],
+    "related_tables": [
+      "Fact_Sales",
+      "Fact_Purchase"
+    ],
+    "business_terms": [
+      "margin",
+      "gross margin",
+      "profitability",
+      "average margin",
+      "sales margin",
+      "purchase margin",
+      "sales",
+      "revenue",
+      "turnover",
+      "purchase cost",
+      "buying cost",
+      "procurement cost"
+    ]
+  }
+]

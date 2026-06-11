@@ -1,0 +1,178 @@
+[
+  {
+    "column_id": "fact_sales.revenue",
+    "table_id": "fact_sales",
+    "table_name": "Fact_Sales",
+    "column_name": "revenue",
+    "primary_business_area_id": "commercial",
+    "business_area_ids": [
+      "commercial"
+    ],
+    "related_kpis": [
+      "gross_margin"
+    ],
+    "business_terms": [
+      "margin",
+      "gross margin",
+      "profitability"
+    ],
+    "departments": [
+      "Sales",
+      "Finance"
+    ]
+  },
+  {
+    "column_id": "fact_sales.cost",
+    "table_id": "fact_sales",
+    "table_name": "Fact_Sales",
+    "column_name": "cost",
+    "primary_business_area_id": "commercial",
+    "business_area_ids": [
+      "commercial"
+    ],
+    "related_kpis": [
+      "gross_margin"
+    ],
+    "business_terms": [
+      "margin",
+      "gross margin",
+      "profitability"
+    ],
+    "departments": [
+      "Sales",
+      "Finance"
+    ]
+  },
+  {
+    "column_id": "fact_sales.margin",
+    "table_id": "fact_sales",
+    "table_name": "Fact_Sales",
+    "column_name": "margin",
+    "primary_business_area_id": "commercial",
+    "business_area_ids": [
+      "commercial"
+    ],
+    "related_kpis": [
+      "average_sales_margin_per_month"
+    ],
+    "business_terms": [
+      "margin",
+      "average margin",
+      "sales margin"
+    ],
+    "departments": [
+      "Sales",
+      "Finance"
+    ]
+  },
+  {
+    "column_id": "fact_sales.month",
+    "table_id": "fact_sales",
+    "table_name": "Fact_Sales",
+    "column_name": "month",
+    "primary_business_area_id": "commercial",
+    "business_area_ids": [
+      "commercial"
+    ],
+    "related_kpis": [
+      "average_sales_margin_per_month"
+    ],
+    "business_terms": [
+      "margin",
+      "average margin",
+      "sales margin"
+    ],
+    "departments": [
+      "Sales",
+      "Finance"
+    ]
+  },
+  {
+    "column_id": "fact_sales.sales_amount",
+    "table_id": "fact_sales",
+    "table_name": "Fact_Sales",
+    "column_name": "sales_amount",
+    "primary_business_area_id": "commercial",
+    "business_area_ids": [
+      "commercial"
+    ],
+    "related_kpis": [
+      "total_sales_amount"
+    ],
+    "business_terms": [
+      "sales",
+      "revenue",
+      "turnover"
+    ],
+    "departments": [
+      "Sales",
+      "Finance"
+    ]
+  },
+  {
+    "column_id": "fact_purchase.margin",
+    "table_id": "fact_purchase",
+    "table_name": "Fact_Purchase",
+    "column_name": "margin",
+    "primary_business_area_id": "procurement",
+    "business_area_ids": [
+      "procurement"
+    ],
+    "related_kpis": [
+      "average_purchase_margin_per_month"
+    ],
+    "business_terms": [
+      "margin",
+      "average margin",
+      "purchase margin"
+    ],
+    "departments": [
+      "Purchasing",
+      "Finance"
+    ]
+  },
+  {
+    "column_id": "fact_purchase.month",
+    "table_id": "fact_purchase",
+    "table_name": "Fact_Purchase",
+    "column_name": "month",
+    "primary_business_area_id": "procurement",
+    "business_area_ids": [
+      "procurement"
+    ],
+    "related_kpis": [
+      "average_purchase_margin_per_month"
+    ],
+    "business_terms": [
+      "margin",
+      "average margin",
+      "purchase margin"
+    ],
+    "departments": [
+      "Purchasing",
+      "Finance"
+    ]
+  },
+  {
+    "column_id": "fact_purchase.purchase_cost",
+    "table_id": "fact_purchase",
+    "table_name": "Fact_Purchase",
+    "column_name": "purchase_cost",
+    "primary_business_area_id": "procurement",
+    "business_area_ids": [
+      "procurement"
+    ],
+    "related_kpis": [
+      "purchase_cost_total"
+    ],
+    "business_terms": [
+      "purchase cost",
+      "buying cost",
+      "procurement cost"
+    ],
+    "departments": [
+      "Purchasing",
+      "Finance"
+    ]
+  }
+]

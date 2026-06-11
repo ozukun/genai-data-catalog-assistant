@@ -1,0 +1,10 @@
+entity_id,entity_type,description
+1,business_term,A business word or concept used by users
+2,kpi,A business metric or KPI
+3,table,A database or semantic table
+4,column,A table column
+5,department,A company department or business function
+6,report,A report used by business users
+7,dashboard,A dashboard or BI page
+8,owner,A person or team responsible for an entity
+9,business_area,A high-level business domain
