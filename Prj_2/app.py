@@ -5,9 +5,11 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from openai import OpenAI
 import chromadb
-
+from Prj_2.index_catalog import main
 
 load_dotenv()
+
+
 
 api_key = os.getenv("OPENAI_API_KEY")
 
@@ -19,9 +21,7 @@ app = FastAPI(title="GenAI Data Catalog Assistant")
 openai_client = OpenAI(api_key=api_key)
 chroma_client = chromadb.PersistentClient(path="./chroma_db")
 
-collection = chroma_client.get_or_create_collection(
-    name="data_catalog"
-)
+
 
 with open("Prj_2/kpi_content.txt", "r", encoding="utf-8") as f:
     kpi_content = f.read()
@@ -50,6 +50,10 @@ def create_embedding(text: str) -> list[float]:
 
     return response.data[0].embedding
 
+def get_collection():
+    return chroma_client.get_or_create_collection(
+        name="data_catalog"
+    )
 
 @app.get("/")
 def root():
@@ -62,7 +66,10 @@ def debug_count():
     return {
         "collection_count": collection.count()
     }
-    
+
+@app.get("/load data")
+def load_data():
+       main()
 
 @app.post("/ask")
 def ask_question(request: QuestionRequest):
@@ -114,6 +121,7 @@ def ask_question(request: QuestionRequest):
     else:
         return f"Error in n_result parameter  {answer_find_json}"
 
+    collection=get_collection()
     results = collection.query(
         query_embeddings=[question_embedding_upd],
         n_results=n_results_var
