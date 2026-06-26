@@ -12,7 +12,11 @@
         Retrieved catalog context:
         {retrieved_context}
 
+        Graph result:
+       {graph_result}
+
         Rules:
+        - If graph_result contains departments, KPIs, tables, or columns, use graph_result as the primary source.
         - Use only the retrieved context.
         - If the answer is not supported by the context, say "I don't know."
         - Mention related KPIs, departments, tables, columns, or business areas when relevant.

@@ -18,10 +18,11 @@ if not api_key:
 
 openai_client = OpenAI(api_key=api_key)
 
-CATALOG_DIR = Path("data/Prj_2_Source")
+CATALOG_DIR = Path("Prj_2/Prj_2_Source")
 CHROMA_PATH = "./chroma_db"
 COLLECTION_NAME = "data_catalog"
 
+chroma_client = chromadb.PersistentClient(path=CHROMA_PATH)
 
 def load_json(filename: str) -> Any:
     path = CATALOG_DIR / filename
@@ -89,10 +90,22 @@ def build_documents() -> list[dict]:
 
     return documents
 
+def get_collection():
+    import sqlite3
+
+    conn = sqlite3.connect("chroma_db/chroma.sqlite3")
+    cur = conn.cursor()
+
+    cur.execute("select id, name from collections where name = ?", ("data_catalog",))
+    row = cur.fetchone()
+
+    print(row)
+
+    conn.close()
 
 def main():
-    chroma_client = chromadb.PersistentClient(path=CHROMA_PATH)
-
+    #chroma_client = chromadb.PersistentClient(path=CHROMA_PATH)
+    #print(get_collection())
     try:
         chroma_client.delete_collection(COLLECTION_NAME)
     except Exception:

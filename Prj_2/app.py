@@ -6,6 +6,8 @@ from pydantic import BaseModel
 from openai import OpenAI
 import chromadb
 from Prj_2.index_catalog import main
+from Prj_2.catalog_graph import find_departments_by_business_terms
+
 
 load_dotenv()
 
@@ -35,7 +37,7 @@ class QuestionRequest(BaseModel):
 
 
 def get_intent():
-        with open("data/Prj_2_Source/catalog_intents.json", "r", encoding="utf-8") as f:
+        with open("Prj_2/Prj_2_Source/catalog_intents.json", "r", encoding="utf-8") as f:
             cat_int = json.load(f)
             intent_list=[]
             for intent_obj in cat_int:
@@ -63,9 +65,7 @@ def root():
 
 @app.get("/debug/count")
 def debug_count():
-    return {
-        "collection_count": collection.count()
-    }
+    return 0
 
 @app.get("/load data")
 def load_data():
@@ -98,20 +98,23 @@ def ask_question(request: QuestionRequest):
     answer_find = response_find.choices[0].message.content
     answer_find_json=json.loads(answer_find)
     #return answer_find_json['business_terms']
-    
-    with open("data/Prj_2_Source/catalog_entity_mappings.json", "r", encoding="utf-8") as f:
-        cat_em = json.load(f)
-    
-    list_key_kpi=[]
-    for answer_key in answer_find_json['business_terms']  :
-        for k in cat_em:
-            if answer_key in (k['source_entity_name']) and k['relationship']=='refers_to' and k['target_entity_type']=='kpi':
-                list_key_kpi.append(k['target_entity_name']) 
 
-    related_kpis= list(set(list_key_kpi))
+    with open("Prj_2/Prj_2_Source/catalog_entity_mappings.json", "r", encoding="utf-8") as f:
+        mappings = json.load(f)
 
-    updated_question= f"{question} , related kpis:{related_kpis}"
-    question_embedding_upd = create_embedding(updated_question)           
+    with open("Prj_2/Prj_2_Source/catalog_kpis_v2.json", "r", encoding="utf-8") as f:
+        kpis = json.load(f)
+
+    graph_result = find_departments_by_business_terms(
+        business_terms=answer_find_json["business_terms"],
+        mappings=mappings,
+        kpis=kpis
+    )
+
+    related_kpis = graph_result["related_kpis"]
+
+    updated_question = f"{question} , related kpis:{related_kpis}"
+    question_embedding_upd = create_embedding(updated_question)        
 
     print(answer_find_json['question_type'])
     if answer_find_json['question_type']=="structured":
@@ -146,6 +149,7 @@ def ask_question(request: QuestionRequest):
 
     prompt_extract_2 = final_prompt.format(
     question=question,
+    graph_result=graph_result,
     retrieved_context=retrieved_context
     )    
 
@@ -167,10 +171,11 @@ def ask_question(request: QuestionRequest):
     )
 
     answer = response.choices[0].message.content
-
+    print(prompt_extract_2)
     return {
     "question": question,
     "extracted_terms": answer_find_json,
+    "graph_result": graph_result,
     "related_kpis": related_kpis,
     "updated_question": updated_question,
     "retrieved_context": retrieved_context,
