@@ -18,7 +18,7 @@ It indexes catalog records into ChromaDB and answers catalog-related questions u
 
 - `Prj_2/index_catalog.py` - Indexes catalog JSON/CSV files into ChromaDB for semantic/vector search.
 
-- `Prj_2/catalog_loader.py` - Loads catalog JSON/CSV source files from `data/Prj_2_Source/`.
+- `Prj_2/catalog_loader.py` -  Utility file for loading catalog JSON/CSV files. It is currently not used in the main application flow.
 
 - `Prj_2/catalog_graph.py` - Deterministic graph-style relationship lookup layer. Uses exact catalog mappings to find related KPIs, departments, tables, and columns.
 
