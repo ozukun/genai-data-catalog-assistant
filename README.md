@@ -12,10 +12,23 @@ It indexes catalog records into ChromaDB and answers catalog-related questions u
 
 ## Main files
 
-- `app.py` - FastAPI application
-- `index_catalog.py` - indexes catalog files into ChromaDB
-- `catalog_loader.py` - loads catalog JSON/CSV files
-- `data/Prj_2_Source/` - catalog source files
+## Main files
+
+- `Prj_2/app.py` - FastAPI application. Handles user questions, AI-based term/intent extraction, graph lookup, vector retrieval, and final answer generation.
+
+- `Prj_2/index_catalog.py` - Indexes catalog JSON/CSV files into ChromaDB for semantic/vector search.
+
+- `Prj_2/catalog_loader.py` - Loads catalog JSON/CSV source files from `data/Prj_2_Source/`.
+
+- `Prj_2/catalog_graph.py` - Deterministic graph-style relationship lookup layer. Uses exact catalog mappings to find related KPIs, departments, tables, and columns.
+
+- `Prj_2/kpi_content.txt` - Prompt used to extract business terms, KPI candidates, department candidates, intent, and question type from the user question.
+
+- `Prj_2/final_prompt.txt` - Prompt used to generate the final answer using graph results and retrieved catalog context.
+
+- `data/Prj_2_Source/` - Source catalog files including business areas, departments, KPIs, tables, columns, intents, relationship types, and entity mappings.
+
+- `chroma_db/` - Local generated ChromaDB vector database folder. This should not be committed to GitHub.
 
 ## Run locally
 
