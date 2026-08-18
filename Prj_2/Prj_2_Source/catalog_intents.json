@@ -1,26 +1,26 @@
 [
   {
     "intent_id": 1,
-    "intent_name": "find_related_departments",
-    "intent_description": "Find departments related to a business term, KPI, table, column, or other catalog entity.",
+    "intent_name": "find_related_entities",
+    "intent_description": "Retrieve or list catalog entities related to another entity or business concept. Use when the user asks which, what, show, find, or list related entities without requesting an explanation.",
     "question_type": "structured"
   },
   {
     "intent_id": 2,
-    "intent_name": "find_source_tables",
-    "intent_description": "Find source tables used by a KPI, metric, report, or catalog entity.",
-    "question_type": "structured"
-  },
-  {
-    "intent_id": 3,
-    "intent_name": "find_source_columns",
-    "intent_description": "Find source columns used to calculate or define a KPI, metric, or catalog entity.",
+    "intent_name": "find_sources",
+    "intent_description": "Retrieve source tables or source columns used by a catalog entity.",
     "question_type": "structured"
   },
   {
     "intent_id": 10,
     "intent_name": "explain_business_context",
-    "intent_description": "Explain a business term, KPI, metric, department, table, or column in a broader business context.",
+    "intent_description": "Explain the meaning, definition, purpose, or business context of a specific entity or business concept itself.",
+    "question_type": "semantic"
+  },
+  {
+    "intent_id": 11,
+    "intent_name": "explain_related_entities",
+    "intent_description": "Explain related catalog entities or concepts when the user explicitly requests explanation, interpretation, or contextual discussion of those related entities.",
     "question_type": "semantic"
   },
   {

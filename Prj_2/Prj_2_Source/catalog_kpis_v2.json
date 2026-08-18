@@ -2,7 +2,7 @@
   {
     "kpi_id": "gross_margin",
     "entity_key": "kpi:gross_margin",
-    "kpi_name": "gross_margin",
+    "kpi_name": "gross margin",
     "display_name": "Gross Margin",
     "description": "Revenue minus cost of goods sold.",
     "formula": {
