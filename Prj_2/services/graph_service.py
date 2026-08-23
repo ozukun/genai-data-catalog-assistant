@@ -90,7 +90,26 @@ class GraphService:
 
         return filtered_relations
 
-        
+    def search(
+        self,
+        source_entity: ResolvedEntity,
+        target_entity: str
+    ) -> GraphResult:
+
+        direct_relations = self.find_direct_relations(
+            source_entity
+        )
+
+        filtered_relations = self.filter_find_relations(
+            direct_relations,
+            target_entity
+        )
+
+        return GraphResult(
+            source_entities=[source_entity],
+            target_entity=target_entity,
+            relations=filtered_relations
+        )       
         
 
 if __name__ == "__main__":
@@ -125,3 +144,14 @@ if __name__ == "__main__":
 
     print("\nFiltered relations:")
     print(graph_service.filter_find_relations(relations, "table"))
+
+
+
+    graph_result = graph_service.search(
+    test_entity,
+    "table"
+    )
+
+    print("\nSearch result:")
+    print(graph_result)
+
