@@ -4,7 +4,6 @@ from pathlib import Path
 from pydantic import BaseModel
 
 from Prj_2.services.entity_resolver_service import (
-    ResolvedQuery,
     ResolvedEntity
 )
 
@@ -93,23 +92,46 @@ class GraphService:
     def search(
         self,
         source_entity: ResolvedEntity,
-        target_entity: str
+        target_entity: str,
+        max_depth: int = 2
     ) -> GraphResult:
 
-        direct_relations = self.find_direct_relations(
-            source_entity
-        )
+        current_sources = [source_entity]
+        current_depth = 0
+        found_relations = []
 
-        filtered_relations = self.filter_find_relations(
-            direct_relations,
-            target_entity
-        )
+        while current_sources and current_depth < max_depth:
+
+            next_sources = []
+
+            for current_source in current_sources:
+
+                relations = self.find_direct_relations(
+                    current_source
+                )
+
+                for relation in relations:
+
+                    if relation.target_entity_type == target_entity:
+                        found_relations.append(relation)
+
+                    else:
+                        next_sources.append(
+                            ResolvedEntity(
+                                entity_type=relation.target_entity_type,
+                                entity_id=relation.target_entity_id,
+                                display_name=relation.target_entity_id
+                            )
+                        )
+
+            current_sources = next_sources
+            current_depth += 1
 
         return GraphResult(
             source_entities=[source_entity],
             target_entity=target_entity,
-            relations=filtered_relations
-        )       
+            relations=found_relations
+        )
         
 
 if __name__ == "__main__":
@@ -127,9 +149,9 @@ if __name__ == "__main__":
         print(graph_service.mappings[0])
 
     test_entity = ResolvedEntity(
-    entity_type="kpi",
-    entity_id="gross_margin",
-    display_name="Gross Margin"
+        entity_type="business_term",
+        entity_id="margin",
+        display_name="margin"
     )
 
     relations = graph_service.find_direct_relations(
@@ -142,14 +164,15 @@ if __name__ == "__main__":
         print(relation)
 
 
-    print("\nFiltered relations:")
-    print(graph_service.filter_find_relations(relations, "table"))
+    #print("\nFiltered relations:")
+    #print(graph_service.filter_find_relations(relations, "table"))
 
 
 
     graph_result = graph_service.search(
-    test_entity,
-    "table"
+        test_entity,
+        "department",
+        max_depth=2
     )
 
     print("\nSearch result:")
