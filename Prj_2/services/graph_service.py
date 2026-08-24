@@ -144,7 +144,27 @@ class GraphService:
             target_entity=target_entity,
             relations=found_relations
         )
-        
+
+
+    def get_unique_data(
+        self,
+        graph_result: GraphResult,
+        key_fields: tuple[str, ...]
+    ) -> list[GraphRelation]:
+
+        unique_data = {}
+
+        for relation in graph_result.relations:
+
+            key = tuple(
+                getattr(relation, field)
+                for field in key_fields
+            )
+
+            if key not in unique_data:
+                unique_data[key] = relation
+
+        return list(unique_data.values())       
 
 if __name__ == "__main__":
 
@@ -190,3 +210,11 @@ if __name__ == "__main__":
     print("\nSearch result:")
     print(graph_result)
 
+
+    print("\nUnique relations:")
+    unique_relations = graph_service.get_unique_data(
+        graph_result,
+        key_fields=( "relationship", "target_entity_type")
+    )
+    for relation in unique_relations:
+        print(relation)
