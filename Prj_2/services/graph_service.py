@@ -100,11 +100,23 @@ class GraphService:
         current_depth = 0
         found_relations = []
 
+        visited = set()
+
         while current_sources and current_depth < max_depth:
 
             next_sources = []
 
             for current_source in current_sources:
+
+                entity_key = (
+                    current_source.entity_type,
+                    current_source.entity_id
+                )
+
+                if entity_key in visited:
+                    continue
+
+                visited.add(entity_key)
 
                 relations = self.find_direct_relations(
                     current_source
