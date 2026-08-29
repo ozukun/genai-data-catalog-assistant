@@ -1,10 +1,27 @@
 from Prj_2.services.graph_service import GraphResult
+from openai import OpenAI
+from dotenv import load_dotenv
+import os
+
+
+
+load_dotenv()
+
+
+
+api_key = os.getenv("OPENAI_API_KEY")
+
+if not api_key:
+    raise ValueError("OPENAI_API_KEY not found. Check .env file.")
+
+
+
 
 
 class AnswerService:
 
     def __init__(self):
-        pass
+        self.client = OpenAI(api_key=api_key)
 
     def build_context(
         self,
@@ -43,6 +60,23 @@ Resolved Results:
 
         return context.strip()
 
+    def generate_answer(
+        self,
+        context: str
+    ) -> str:
+
+        response = self.client.responses.create(
+            model="gpt-5.6",
+            instructions="""
+            Answer the user's question using only the provided catalog context.
+            Do not invent entities or relationships.
+            If the context does not contain enough information, say so.
+            Keep the answer concise and clear.
+            """,
+            input=context
+        )
+
+        return response.output_text
 
 
 if __name__ == "__main__":
@@ -95,3 +129,10 @@ if __name__ == "__main__":
 
     print("\nGenerated Context:")
     print(context)
+
+    answer = answer_service.generate_answer(
+        context
+    )
+
+    print("\nFinal Answer:")
+    print(answer)
