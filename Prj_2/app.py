@@ -1,183 +1,202 @@
 import os
-from dotenv import load_dotenv
-import json
-from fastapi import FastAPI
-from pydantic import BaseModel
-from openai import OpenAI
-import chromadb
-from Prj_2.index_catalog import main
-from Prj_2.catalog_graph import find_departments_by_business_terms
 
+from dotenv import load_dotenv
+from fastapi import FastAPI
+from openai import OpenAI
+from pydantic import BaseModel
+
+from Prj_2.services.query_service import QueryService
+from Prj_2.services.entity_resolver_service import EntityResolverService
+from Prj_2.services.graph_service import GraphService
+from Prj_2.services.answer_service import AnswerService
+
+
+# --------------------------------------------------
+# Environment
+# --------------------------------------------------
 
 load_dotenv()
-
-
 
 api_key = os.getenv("OPENAI_API_KEY")
 
 if not api_key:
-    raise ValueError("OPENAI_API_KEY not found. Check .env file.")
-
-app = FastAPI(title="GenAI Data Catalog Assistant")
-
-openai_client = OpenAI(api_key=api_key)
-chroma_client = chromadb.PersistentClient(path="./chroma_db")
+    raise ValueError(
+        "OPENAI_API_KEY not found. Check .env file."
+    )
 
 
+# --------------------------------------------------
+# FastAPI
+# --------------------------------------------------
 
-with open("Prj_2/kpi_content.txt", "r", encoding="utf-8") as f:
-    kpi_content = f.read()
-#print(kpi_content)
+app = FastAPI(
+    title="GenAI Data Catalog Assistant"
+)
 
-with open("Prj_2/final_prompt.txt", "r", encoding="utf-8") as f:
-    final_prompt = f.read()
+
+# --------------------------------------------------
+# Shared OpenAI client
+# --------------------------------------------------
+
+openai_client = OpenAI(
+    api_key=api_key
+)
+
+
+# --------------------------------------------------
+# Services
+# --------------------------------------------------
+
+query_service = QueryService(
+    openai_client=openai_client
+)
+
+entity_resolver = EntityResolverService()
+
+graph_service = GraphService()
+
+answer_service = AnswerService()
+
+
+# --------------------------------------------------
+# Request Model
+# --------------------------------------------------
 
 class QuestionRequest(BaseModel):
     question: str
 
 
-def get_intent():
-        with open("Prj_2/Prj_2_Source/catalog_intents.json", "r", encoding="utf-8") as f:
-            cat_int = json.load(f)
-            intent_list=[]
-            for intent_obj in cat_int:
-                    intent_list.append( [intent_obj['intent_name'],intent_obj['intent_description'],intent_obj['question_type']] )
-            return intent_list
-
-def create_embedding(text: str) -> list[float]:
-    response = openai_client.embeddings.create(
-        model="text-embedding-3-small",
-        input=text
-    )
-
-    return response.data[0].embedding
-
-def get_collection():
-    return chroma_client.get_or_create_collection(
-        name="data_catalog"
-    )
+# --------------------------------------------------
+# Root
+# --------------------------------------------------
 
 @app.get("/")
 def root():
+
     return {
         "message": "GenAI Data Catalog Assistant is running"
     }
 
-@app.get("/debug/count")
-def debug_count():
-    return 0
 
-@app.get("/load data")
-def load_data():
-       main()
+# --------------------------------------------------
+# Ask
+# --------------------------------------------------
 
 @app.post("/ask")
-def ask_question(request: QuestionRequest):
+def ask_question(
+    request: QuestionRequest
+):
+
     question = request.question
-    question_embedding = create_embedding(question)
 
-    intent_list = get_intent()
-    
-    prompt_extract = kpi_content.format(
-    intent_list=intent_list,
-    question=question
-    )
-    print(prompt_extract)
-    response_find = openai_client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {
-                "role": "user",
-                "content": prompt_extract
-                
-            }
-        ],
-        temperature=0
+
+    # ----------------------------------------------
+    # 1. Understand the question
+    # ----------------------------------------------
+
+    query_analysis = query_service.analyze(
+        question
     )
 
-    answer_find = response_find.choices[0].message.content
-    answer_find_json=json.loads(answer_find)
-    #return answer_find_json['business_terms']
 
-    with open("Prj_2/Prj_2_Source/catalog_entity_mappings.json", "r", encoding="utf-8") as f:
-        mappings = json.load(f)
+    # ----------------------------------------------
+    # 2. Resolve catalog entities
+    # ----------------------------------------------
 
-    with open("Prj_2/Prj_2_Source/catalog_kpis_v2.json", "r", encoding="utf-8") as f:
-        kpis = json.load(f)
-
-    graph_result = find_departments_by_business_terms(
-        business_terms=answer_find_json["business_terms"],
-        mappings=mappings,
-        kpis=kpis
+    resolved_query = entity_resolver.resolve(
+        query_analysis
     )
 
-    related_kpis = graph_result["related_kpis"]
 
-    updated_question = f"{question} , related kpis:{related_kpis}"
-    question_embedding_upd = create_embedding(updated_question)        
+    # ----------------------------------------------
+    # 3. Vector fallback will come here later
+    # ----------------------------------------------
 
-    print(answer_find_json['question_type'])
-    if answer_find_json['question_type']=="structured":
-        n_results_var=10
-    elif answer_find_json['question_type']=="semantic":
-        n_results_var=20
-    else:
-        return f"Error in n_result parameter  {answer_find_json}"
+    if not resolved_query.source_entities:
 
-    collection=get_collection()
-    results = collection.query(
-        query_embeddings=[question_embedding_upd],
-        n_results=n_results_var
+        return {
+            "question": question,
+            "query_analysis": query_analysis,
+            "resolved_query": resolved_query,
+            "answer": (
+                "No exact catalog entity could be resolved. "
+                "Semantic vector fallback is not implemented yet."
+            )
+        }
+
+
+    # ----------------------------------------------
+    # 4. Target entity required for graph search
+    # ----------------------------------------------
+
+    if not resolved_query.target_entity:
+
+        return {
+            "question": question,
+            "query_analysis": query_analysis,
+            "resolved_query": resolved_query,
+            "answer": (
+                "No target entity was identified for "
+                "structured graph retrieval."
+            )
+        }
+
+
+    # ----------------------------------------------
+    # 5. Graph Search
+    # ----------------------------------------------
+
+    source_entity = resolved_query.source_entities[0]
+
+    graph_result = graph_service.search(
+        source_entity=source_entity,
+        target_entity=resolved_query.target_entity,
+        max_depth=2
     )
 
-    retrieved_context = []
 
-    documents = results.get("documents", [[]])[0]
-    metadatas = results.get("metadatas", [[]])[0]
-    distances = results.get("distances", [[]])[0]
+    # ----------------------------------------------
+    # 6. Unique target entities
+    # ----------------------------------------------
 
-    for doc, metadata, distance in zip(documents, metadatas, distances):
-        retrieved_context.append(
-            {
-                "source_file": metadata.get("source_file"),
-                "record_index": metadata.get("record_index"),
-                "distance": distance,
-                "content": doc
-            }
+    unique_data = graph_service.get_unique_data(
+        graph_result,
+        key_fields=(
+            "target_entity_type",
+            "target_entity_id"
         )
-
-
-    prompt_extract_2 = final_prompt.format(
-    question=question,
-    graph_result=graph_result,
-    retrieved_context=retrieved_context
-    )    
-
-
-
-    response = openai_client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a careful data catalog assistant. Do not invent facts."
-            },
-            {
-                "role": "user",
-                "content": prompt_extract_2
-            }
-        ],
-        temperature=0
     )
 
-    answer = response.choices[0].message.content
-    print(prompt_extract_2)
+
+    # ----------------------------------------------
+    # 7. Build grounded LLM context
+    # ----------------------------------------------
+
+    context = answer_service.build_context(
+        question=question,
+        graph_result=graph_result,
+        unique_data=unique_data
+    )
+
+
+    # ----------------------------------------------
+    # 8. Generate final answer
+    # ----------------------------------------------
+
+    answer = answer_service.generate_answer(
+        context
+    )
+
+
+    # ----------------------------------------------
+    # 9. API Response
+    # ----------------------------------------------
+
     return {
-    "question": question,
-    "extracted_terms": answer_find_json,
-    "graph_result": graph_result,
-    "related_kpis": related_kpis,
-    "updated_question": updated_question,
-    "retrieved_context": retrieved_context,
-    "answer": answer
-    } 
+        "question": question,
+        "query_analysis": query_analysis,
+        "resolved_query": resolved_query,
+        "graph_result": graph_result,
+        "unique_data": unique_data,
+        "answer": answer
+    }
