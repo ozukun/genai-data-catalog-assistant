@@ -1,0 +1,211 @@
+
+            ======================================================================
+            QUESTION: Which KPIs are related to Margin?
+
+            RAW QUERY ANALYSIS
+            Entity Mentions: ['Margin']
+            Intent: find_related_entities
+            Target Entity: kpi
+            Question Type: structured
+
+            RESOLVED QUERY
+            Intent: find_related_entities
+            Target Entity: kpi
+            Question Type: structured
+
+            Source Entities:
+            [ResolvedEntity(entity_type='business_term', entity_id='margin', display_name='margin')]
+
+            Unresolved Terms:
+            []
+
+            
+            ======================================================================
+            QUESTION: Which departments are related to Margin?
+
+            RAW QUERY ANALYSIS
+            Entity Mentions: ['Margin']
+            Intent: find_related_entities
+            Target Entity: department
+            Question Type: structured
+
+            RESOLVED QUERY
+            Intent: find_related_entities
+            Target Entity: department
+            Question Type: structured
+
+            Source Entities:
+            [ResolvedEntity(entity_type='business_term', entity_id='margin', display_name='margin')]
+
+            Unresolved Terms:
+            []
+
+            
+            ======================================================================
+            QUESTION: Which source tables are used by Gross Margin?
+
+            RAW QUERY ANALYSIS
+            Entity Mentions: ['Gross Margin']
+            Intent: find_sources
+            Target Entity: table
+            Question Type: structured
+
+            RESOLVED QUERY
+            Intent: find_sources
+            Target Entity: table
+            Question Type: structured
+
+            Source Entities:
+            [ResolvedEntity(entity_type='kpi', entity_id='gross_margin', display_name='Gross Margin')]
+
+            Unresolved Terms:
+            []
+
+            
+            ======================================================================
+            QUESTION: Which source columns are used to calculate Gross Margin?
+
+            RAW QUERY ANALYSIS
+            Entity Mentions: ['Gross Margin']
+            Intent: find_sources
+            Target Entity: column
+            Question Type: structured
+
+            RESOLVED QUERY
+            Intent: find_sources
+            Target Entity: column
+            Question Type: structured
+
+            Source Entities:
+            [ResolvedEntity(entity_type='kpi', entity_id='gross_margin', display_name='Gross Margin')]
+
+            Unresolved Terms:
+            []
+
+            
+            ======================================================================
+            QUESTION: What does Gross Margin mean?
+
+            RAW QUERY ANALYSIS
+            Entity Mentions: ['Gross Margin']
+            Intent: explain_business_context
+            Target Entity: None
+            Question Type: semantic
+
+            RESOLVED QUERY
+            Intent: explain_business_context
+            Target Entity: None
+            Question Type: semantic
+
+            Source Entities:
+            [ResolvedEntity(entity_type='kpi', entity_id='gross_margin', display_name='Gross Margin')]
+
+            Unresolved Terms:
+            []
+
+            
+            ======================================================================
+            QUESTION: Which KPIs are related to the Finance department?
+
+            RAW QUERY ANALYSIS
+            Entity Mentions: ['Finance department']
+            Intent: find_related_entities
+            Target Entity: kpi
+            Question Type: structured
+
+            RESOLVED QUERY
+            Intent: find_related_entities
+            Target Entity: kpi
+            Question Type: structured
+
+            Source Entities:
+            [ResolvedEntity(entity_type='department', entity_id='finance', display_name='Finance')]
+
+            Unresolved Terms:
+            []
+
+            
+            ======================================================================
+            QUESTION: Show me KPIs related to Customer.
+
+            RAW QUERY ANALYSIS
+            Entity Mentions: ['Customer']
+            Intent: find_related_entities
+            Target Entity: kpi
+            Question Type: structured
+
+            RESOLVED QUERY
+            Intent: find_related_entities
+            Target Entity: kpi
+            Question Type: structured
+
+            Source Entities:
+            []
+
+            Unresolved Terms:
+            ['Customer']
+
+            
+            ======================================================================
+            QUESTION: Which department is Customer Churn related to?
+
+            RAW QUERY ANALYSIS
+            Entity Mentions: ['Customer Churn']
+            Intent: find_related_entities
+            Target Entity: department
+            Question Type: structured
+
+            RESOLVED QUERY
+            Intent: find_related_entities
+            Target Entity: department
+            Question Type: structured
+
+            Source Entities:
+            []
+
+            Unresolved Terms:
+            ['Customer Churn']
+
+            
+            ======================================================================
+            QUESTION: Which source tables are used by Revenue?
+
+            RAW QUERY ANALYSIS
+            Entity Mentions: ['Revenue']
+            Intent: find_sources
+            Target Entity: table
+            Question Type: structured
+
+            RESOLVED QUERY
+            Intent: find_sources
+            Target Entity: table
+            Question Type: structured
+
+            Source Entities:
+            [ResolvedEntity(entity_type='business_term', entity_id='revenue', display_name='revenue')]
+
+            Unresolved Terms:
+            []
+
+            
+            ======================================================================
+            QUESTION: Explain the metrics related to sales performance.
+
+            RAW QUERY ANALYSIS
+            Entity Mentions: ['sales performance']
+            Intent: explain_related_entities
+            Target Entity: None
+            Question Type: semantic
+
+            RESOLVED QUERY
+            Intent: explain_related_entities
+            Target Entity: None
+            Question Type: semantic
+
+            Source Entities:
+            []
+
+            Unresolved Terms:
+            ['sales performance']
+
+            

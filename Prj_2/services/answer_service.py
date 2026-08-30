@@ -83,48 +83,39 @@ if __name__ == "__main__":
 
     from Prj_2.services.entity_resolver_service import ResolvedEntity
     from Prj_2.services.graph_service import GraphResult, GraphRelation
+    from Prj_2.services.graph_service import GraphService
 
     answer_service = AnswerService()
 
-    test_graph_result = GraphResult(
-        source_entities=[
-            ResolvedEntity(
-                entity_type="business_term",
-                entity_id="margin",
-                display_name="margin"
-            )
-        ],
-        target_entity="department",
-        relations=[
-            GraphRelation(
-                source_entity_type="kpi",
-                source_entity_id="gross_margin",
-                relationship="mapped_to_department",
-                target_entity_type="department",
-                target_entity_id="Sales"
-            ),
-            GraphRelation(
-                source_entity_type="kpi",
-                source_entity_id="gross_margin",
-                relationship="mapped_to_department",
-                target_entity_type="department",
-                target_entity_id="Finance"
-            )
-        ]
+
+    graph_service = GraphService()
+
+    test_entity = ResolvedEntity(
+        entity_type="business_term",
+        entity_id="margin",
+        display_name="margin"
     )
 
-    test_unique_data = [
-        ("department", "Sales"),
-        ("department", "Finance"),
-        ("department", "Purchasing")
-    ]
+    graph_result = graph_service.search(
+        source_entity=test_entity,
+        target_entity="department",
+        max_depth=2
+    )
+
+    unique_data = graph_service.get_unique_data(
+        graph_result,
+        key_fields=(
+            "target_entity_type",
+            "target_entity_id"
+        )
+    )
 
     question = "Which departments are related to Margin?"
 
     context = answer_service.build_context(
         question,
-        test_graph_result,
-        test_unique_data
+        graph_result,
+        unique_data
     )
 
     print("\nGenerated Context:")
