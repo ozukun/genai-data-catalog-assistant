@@ -9,6 +9,7 @@ It indexes catalog records into ChromaDB and answers catalog-related questions u
 
 <img width="1538" height="1022" alt="AI_2" src="https://github.com/user-attachments/assets/20c99f71-1f45-40ec-b5b1-5c891016c427" />
 
+<img width="1024" height="1536" alt="RAG" src="https://github.com/user-attachments/assets/c99074fd-9ab0-4379-bd3c-5258b2fae921" />
 
 ## Main files
 
