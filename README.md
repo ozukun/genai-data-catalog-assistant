@@ -44,3 +44,9 @@ Create `.env`:
 
 ```env
 OPENAI_API_KEY=your_api_key
+
+
+## Example End-to-End Query Flow
+<img width="1024" height="1536" alt="ETE" src="https://github.com/user-attachments/assets/eeac921f-2382-4855-9b56-f0f1edbb6de5" />
+
+
