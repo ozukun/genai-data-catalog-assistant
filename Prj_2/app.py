@@ -6,9 +6,13 @@ from openai import OpenAI
 from pydantic import BaseModel
 
 from Prj_2.services.query_service import QueryService
-from Prj_2.services.entity_resolver_service import EntityResolverService
+from Prj_2.services.entity_resolver_service import (
+    EntityResolverService,
+    ResolvedEntity
+)
 from Prj_2.services.graph_service import GraphService
 from Prj_2.services.answer_service import AnswerService
+from Prj_2.services.vector_service import VectorService
 
 
 # --------------------------------------------------
@@ -52,6 +56,10 @@ query_service = QueryService(
 )
 
 entity_resolver = EntityResolverService()
+
+vector_service = VectorService(
+    openai_client=openai_client
+)
 
 graph_service = GraphService()
 
@@ -100,7 +108,7 @@ def ask_question(
 
 
     # ----------------------------------------------
-    # 2. Resolve catalog entities
+    # 2. Resolve exact catalog entities
     # ----------------------------------------------
 
     resolved_query = entity_resolver.resolve(
@@ -109,20 +117,67 @@ def ask_question(
 
 
     # ----------------------------------------------
-    # 3. Vector fallback will come here later
+    # 3. Semantic vector fallback
     # ----------------------------------------------
+
+    semantic_candidates = []
 
     if not resolved_query.source_entities:
 
-        return {
-            "question": question,
-            "query_analysis": query_analysis,
-            "resolved_query": resolved_query,
-            "answer": (
-                "No exact catalog entity could be resolved. "
-                "Semantic vector fallback is not implemented yet."
+        for unresolved_term in resolved_query.unresolved_terms:
+
+            candidates = vector_service.search(
+                term=unresolved_term,
+                limit=3
             )
-        }
+
+            semantic_candidates.extend(
+                candidates
+            )
+
+
+        # ------------------------------------------
+        # No exact or semantic entity found
+        # ------------------------------------------
+
+        if not semantic_candidates:
+
+            return {
+                "question": question,
+                "query_analysis": query_analysis,
+                "resolved_query": resolved_query,
+                "semantic_candidates": [],
+                "answer": (
+                    "No relevant catalog entity "
+                    "could be found."
+                )
+            }
+
+
+        # ------------------------------------------
+        # Select best semantic candidate
+        # ------------------------------------------
+
+        best_candidate = min(
+            semantic_candidates,
+            key=lambda candidate: candidate.distance
+        )
+
+
+        # ------------------------------------------
+        # Convert semantic candidate
+        # into resolved source entity
+        # ------------------------------------------
+
+        source_entity = ResolvedEntity(
+            entity_type=best_candidate.entity_type,
+            entity_id=best_candidate.entity_id,
+            display_name=best_candidate.display_name
+        )
+
+        resolved_query.source_entities.append(
+            source_entity
+        )
 
 
     # ----------------------------------------------
@@ -135,6 +190,7 @@ def ask_question(
             "question": question,
             "query_analysis": query_analysis,
             "resolved_query": resolved_query,
+            "semantic_candidates": semantic_candidates,
             "answer": (
                 "No target entity was identified for "
                 "structured graph retrieval."
@@ -143,10 +199,15 @@ def ask_question(
 
 
     # ----------------------------------------------
-    # 5. Graph Search
+    # 5. Select source entity
     # ----------------------------------------------
 
     source_entity = resolved_query.source_entities[0]
+
+
+    # ----------------------------------------------
+    # 6. Graph Search
+    # ----------------------------------------------
 
     graph_result = graph_service.search(
         source_entity=source_entity,
@@ -156,7 +217,7 @@ def ask_question(
 
 
     # ----------------------------------------------
-    # 6. Unique target entities
+    # 7. Unique target entities
     # ----------------------------------------------
 
     unique_data = graph_service.get_unique_data(
@@ -169,7 +230,7 @@ def ask_question(
 
 
     # ----------------------------------------------
-    # 7. Build grounded LLM context
+    # 8. Build grounded LLM context
     # ----------------------------------------------
 
     context = answer_service.build_context(
@@ -180,7 +241,7 @@ def ask_question(
 
 
     # ----------------------------------------------
-    # 8. Generate final answer
+    # 9. Generate final answer
     # ----------------------------------------------
 
     answer = answer_service.generate_answer(
@@ -189,13 +250,14 @@ def ask_question(
 
 
     # ----------------------------------------------
-    # 9. API Response
+    # 10. API Response
     # ----------------------------------------------
 
     return {
         "question": question,
         "query_analysis": query_analysis,
         "resolved_query": resolved_query,
+        "semantic_candidates": semantic_candidates,
         "graph_result": graph_result,
         "unique_data": unique_data,
         "answer": answer
