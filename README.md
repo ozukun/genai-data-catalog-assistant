@@ -38,6 +38,11 @@ The application combines deterministic catalog resolution with semantic retrieva
 - `Prj_2/services/answer_service.py` - builds grounded context and generates the final answer
 - `Prj_2/Prj_2_Source/` - catalog source JSON/CSV files
 
+## Example End-to-End Query Flow
+<img width="1024" height="1536" alt="ETE" src="https://github.com/user-attachments/assets/eeac921f-2382-4855-9b56-f0f1edbb6de5" />
+
+
+
 ## Run locally
 
 Create `.env`:
@@ -46,7 +51,6 @@ Create `.env`:
 OPENAI_API_KEY=your_api_key
 
 
-## Example End-to-End Query Flow
-<img width="1024" height="1536" alt="ETE" src="https://github.com/user-attachments/assets/eeac921f-2382-4855-9b56-f0f1edbb6de5" />
+
 
 
