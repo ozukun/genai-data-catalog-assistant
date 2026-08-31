@@ -43,13 +43,13 @@ The application combines deterministic catalog resolution with semantic retrieva
 
 
 
+
 ## Run locally
 
 Create `.env`:
 
 ```env
 OPENAI_API_KEY=your_api_key
-
 
 
 
