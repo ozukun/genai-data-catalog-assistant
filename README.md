@@ -17,6 +17,16 @@ It combines exact entity resolution, semantic search with ChromaDB, catalog rela
 <img width="1024" height="1536" alt="RAG" src="https://github.com/user-attachments/assets/c99074fd-9ab0-4379-bd3c-5258b2fae921" />
 
 
+## Architecture
+
+The application combines deterministic catalog resolution with semantic retrieval and graph-based relationship traversal.
+
+1. **QueryService** analyzes the user question and identifies the intent, source entity mentions, and target entity type.
+2. **EntityResolverService** attempts to resolve the source entity directly against the catalog.
+3. **VectorService** uses ChromaDB as a semantic fallback when an exact catalog entity cannot be resolved.
+4. **GraphService** traverses relationships defined in `catalog_entity_mappings.json`.
+5. **AnswerService** uses the retrieved catalog context to generate a grounded natural-language answer.
+
 ## Main files
 
 - `Prj_2/app.py` - FastAPI application and end-to-end query flow
