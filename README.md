@@ -4,8 +4,11 @@ Local demo project for a semantic data catalog assistant.
 
 ## Purpose
 
-This project loads business catalog metadata such as KPIs, business areas, departments, tables, columns, and entity mappings.  
-It indexes catalog records into ChromaDB and answers catalog-related questions using OpenAI.
+This project loads business catalog metadata such as KPIs, business areas, departments, tables, columns, and entity mappings.
+
+It combines exact entity resolution, semantic search with ChromaDB, catalog relationship traversal, and OpenAI-based answer generation to answer data catalog questions.
+
+
 
 <img width="1538" height="1022" alt="AI_2" src="https://github.com/user-attachments/assets/20c99f71-1f45-40ec-b5b1-5c891016c427" />
 
