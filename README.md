@@ -13,10 +13,16 @@ It indexes catalog records into ChromaDB and answers catalog-related questions u
 
 ## Main files
 
-- `app.py` - FastAPI application
-- `index_catalog.py` - indexes catalog files into ChromaDB
-- `catalog_loader.py` - loads catalog JSON/CSV files
-- `data/Prj_2_Source/` - catalog source files
+## Main files
+
+- `Prj_2/app.py` - FastAPI application and end-to-end query flow
+- `Prj_2/index_catalog.py` - creates embeddings and indexes catalog entities into ChromaDB
+- `Prj_2/services/query_service.py` - analyzes user questions and extracts intent, entity mentions, and target entity
+- `Prj_2/services/entity_resolver_service.py` - resolves exact catalog entities and tracks unresolved terms
+- `Prj_2/services/vector_service.py` - performs semantic search over catalog entities in ChromaDB
+- `Prj_2/services/graph_service.py` - traverses relationships stored in `catalog_entity_mappings.json`
+- `Prj_2/services/answer_service.py` - builds grounded context and generates the final answer
+- `Prj_2/Prj_2_Source/` - catalog source JSON/CSV files
 
 ## Run locally
 
